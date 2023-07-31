@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.png" />
+  <title>Gerador de Código de Barras</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="text/javascript" src="./JsBarcode.all.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <input type="text" name="txt_input" id="txt_input">
+    <button id="btn_generate">Gerar</button>
+    <br>
+    <div class="barcode-container">
+      <canvas id="barcode"></canvas>
+    </div>
+    <br>
+    <a href="#" id="btn_download" download="barcode.png" style="display: none;">Baixar Código de Barras</a>
+  </div>
+
+  <script type="text/javascript">
+    document.getElementById('btn_generate').addEventListener('click', () => {
+      const text = document.getElementById('txt_input').value;
+
+      JsBarcode('#barcode', text);
+
+      const canvas = document.getElementById('barcode');
+      const dataURL = canvas.toDataURL("image/png");
+
+      const downloadButton = document.getElementById('btn_download');
+      downloadButton.href = dataURL;
+      downloadButton.style.display = "block";
+    });
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/canvg@1.5.3/dist/umd/canvg.min.js"></script>
+</body>
+
+</html>
